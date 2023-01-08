@@ -35,7 +35,8 @@ plugins:
   - jekyll-feed
   - jekyll-paginate
 paginate: 3
-paginate_path: !join [*base, "/page-:num/"]
+#paginate_path: !join [*base, "/page-:num/"]
+paginate_path: "/codemotes/page-:num/"
 
 # Exclude from processing.
 # The following items will not be processed, by default.
