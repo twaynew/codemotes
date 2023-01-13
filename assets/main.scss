@@ -55,7 +55,7 @@
     @include relative-font-size(0.75);
     font-weight: 500;
     line-height: $base-line-height * $base-font-size * 0.0025; //2.25;
-    letter-spacing: -0.45px; //-0.65px; //-1px;
+    letter-spacing: -0.25px; //-0.65px; //-1px;
     margin-bottom: 0;
     clear: left;
     display: block;
