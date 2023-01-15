@@ -26,20 +26,7 @@ print_hi('Tom')
 
 <p id="demo"></p>
 
-<script type="text/javascript">
-        function myFunction() {
-    var time = new Date().getDate();
-
-    if (time % 2 != 0) {
-        greeting = "Odd Day";
-    } else  {
-        greeting = "Even Day";
-    }
-    document.getElementById("demo").innerHTML = greeting;
-}
-
-myFunction();
-</script>
+<script src="/assets/js/foo.js"></script>
 
 Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
 
