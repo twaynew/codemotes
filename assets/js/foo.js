@@ -2,12 +2,12 @@ function myFunction( myImage ) {
     var time = new Date().getDate();
 
     if (time % 2 == 0) {
-        elem = document.querySelector('.site-header0');
         let preloaderImg = document.createElement("img");
         preloaderImg.src = myImage;
         
         preloaderImg.addEventListener('load', (event) => {
-            bgElement.style.backgroundImage = `url(${myImage})`;
+            elem = document.querySelector('.site-header0');
+            elem.style.backgroundImage = `url(${myImage})`;
             preloaderImg = null;
         });
     }
