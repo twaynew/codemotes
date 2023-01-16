@@ -1,5 +1,5 @@
 function myFunction( myImage ) {
-    const imageUrl = myImage;
+    const imageUrl = "/codemotes/assets/Screen Shot 2023-01-13 at 7.03.48 PM.jpg";
     
     var time = new Date().getDate();
     var path = `url('${myImage}')`;
