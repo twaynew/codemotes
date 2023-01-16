@@ -1,7 +1,6 @@
 function myFunction( myImage ) {
     setTimeout(function() {
-  //your code to be executed after 1 second
-    }, 1000);
+    
     var time = new Date().getDate();
     var path = `url('${myImage}')`;
 
@@ -9,4 +8,6 @@ function myFunction( myImage ) {
         elem = document.querySelector('.site-header0');
         elem.style.backgroundImage = path;
     }
+        
+    }, 2000);
 }
