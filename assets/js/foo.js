@@ -1,5 +1,5 @@
 function myFunction( myImage ) {
-    setTimeout(function() {
+    setTimeout(function( myImage ) {
     
     var time = new Date().getDate();
     var path = `url('${myImage}')`;
