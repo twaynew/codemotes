@@ -3,6 +3,7 @@ function myFunction( myImage ) {
     var path = ''.concat("url('", myImage, "')");
 
     if (time % 2 != 0) {
-        document.querySelector('.site-header0').style.backgroundImage = path;
+        elem = document.querySelector('.site-header0');
+        elem.style.backgroundImage = path;
     }
 }
