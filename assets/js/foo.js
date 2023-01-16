@@ -7,7 +7,7 @@ function myFunction( myImage ) {
         
         preloaderImg.addEventListener('load', (event) => {
             elem = document.querySelector('.site-header0');
-            elem.style.backgroundImage = `url(${myImage})`;
+            elem.style.backgroundImage = `url('${myImage}')`;
             preloaderImg = null;
         });
     }
