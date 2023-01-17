@@ -30,6 +30,7 @@ twitter_username: jekyllrb
 github_username:  jekyll
 
 show_excerpts: true
+bannerphoto: Screen Shot 2023-01-13 at 7.03.48 PM.jpg
 
 # Build settings
 theme: minima
