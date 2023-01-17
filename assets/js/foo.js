@@ -1,3 +1,8 @@
+---
+---
+// {{ site.baseurl }}
+// {{ page.path }}
+// {{ site.bannerphoto }}
 function myFunction( myImage ) {    
     var time = new Date().getDate();
 
@@ -13,5 +18,5 @@ function myFunction( myImage ) {
     }
 }
 
-const imageUrl = "/codemotes/assets/Screen Shot 2023-01-13 at 7.03.48 PM.jpg";
+const imageUrl = "{{ site.baseurl }}/assets/{{ site.bannerphoto }}"; // Screen Shot 2023-01-13 at 7.03.48 PM.jpg";
 myFunction( imageUrl );
