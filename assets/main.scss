@@ -40,7 +40,7 @@
   }
 
 .site-title {
-  @include relative-font-size(1.5); //1.625); //modified 03-02
+  @include relative-font-size(1.25); //1.625); //modified 03-02
   font-weight: 800;
   line-height: $base-line-height * $base-font-size * 1.5; //1.65; //2.25;  //modified 03-02
   letter-spacing: 3px;  //-0.005px; //-1px;
