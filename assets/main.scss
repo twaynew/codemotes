@@ -58,7 +58,12 @@
     font-weight: 500;
     line-height: $base-line-height * $base-font-size * 0.0025; //2.25;
     letter-spacing: -0.25px; //-0.65px; //-1px;
-    margin-bottom: 0;
+   
+   //revised 03-02
+    margin-bottom: auto;  //modified from 0 to auto
+    float: left; //added
+   
+   //(unmodified)
     clear: left;
    
    //revised 03-02
@@ -66,7 +71,7 @@
    overflow: hidden;
     border-right: .15em solid white;
     white-space: nowrap;
-    animation: typing 10s steps(20, end), blinking 0.8s step-end infinite;
+    animation: typing 15s steps(100, end), blinking 0.8s step-end infinite;
     //font-size: 1.6rem;
     width: auto;
     //position: relative;
