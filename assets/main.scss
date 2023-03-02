@@ -56,8 +56,8 @@
   .site-title0 {
     @include relative-font-size(0.75);
     font-weight: 500;
-    line-height: $base-line-height * $base-font-size * 0.0025; //2.25;
-    letter-spacing: -0.25px; //-0.65px; //-1px;
+    line-height: 1.2; //$base-line-height * $base-font-size * 0.0025; //revised 03-02
+    letter-spacing: 0.07em; //-0.25px; //-0.65px; //-1px;  //revised 03-02
    
    //revised 03-02
     margin-bottom: auto;  //modified from 0 to auto
