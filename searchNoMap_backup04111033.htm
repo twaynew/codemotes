@@ -1,0 +1,273 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <!--
+     ArcGIS API for JavaScript, https://js.arcgis.com
+     For more information about the widgets-search-3d sample,
+     read the original sample description at developers.arcgis.com.
+     https://developers.arcgis.com/javascript/latest/sample-code/widgets-search-3d/index.html
+     -->
+    <title>Search Widget | Sample | ArcGIS API for JavaScript 4.26</title>
+
+    <style>
+        html,
+        body,
+  
+        #container {
+          padding: 0;
+          margin: 0;
+          height: 100%;
+          width: 100%;
+        }
+  
+        .container {
+          padding: 1em;
+        }
+  
+        #btnQuery {
+          overflow: auto;
+          text-align: center;
+          cursor: pointer;
+          font-size: 1em;
+        }
+  
+        input {
+          width: 75%;
+        }
+
+        #viewDiv {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+      }
+      </style>
+
+<link rel="stylesheet" href="https://js.arcgis.com/4.26/esri/themes/light/main.css" />
+<script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+<script src="https://js.arcgis.com/4.26/"></script>
+
+</head>
+
+<body>
+
+
+  <div id="viewDiv">
+    <div id="searchDiv"></div>
+    <br />
+    <div id="results"></div>
+    <br />
+    <pre id="text"></pre>
+    <div id='myDivPie'><!--....for example, enter the address: 30 LAUGHING GULL LN, PALM COAST--></div>
+    <!-- <div id='myDivTbl'></div> -->
+  </div>
+  
+
+    <script>
+        // CONSTANTS
+        //current total county ad valorem tax rate
+        var millage = 7.9297;   
+
+        //array of current tax distribution percentages for county depts/services
+        tax = {
+                'FCSO - Law Enforcement': 25.13481202,
+                'FCSO - Jail': 6.034130519,
+                'FCSO - Bailiff': 1.735783574,
+                'Property Appraiser': 2.870777193,
+                'Tax Collector': 3.484178189,
+                'Supervisor of Elections': 1.708039286,
+                'Clerk of Circuit Court & Comptroller': 2.299244851,
+                'Health & Human Services and Public Transportation': 6.717144457,
+                'Veterans Services Office': 0.16949238,
+                'Library': 1.465907314,
+                'FCSO - Internal Expenditures': 1.025025348,
+                'Reserves (amount increased for FY 2022-23)': 0.005548858,
+                'Fire Services (Fire Admin, Fire, & Flight Ops)': 9.096091082,
+                'EMS': 6.215729498,
+                'Parks': 3.0296763,
+                'Facilities Management': 4.192918649,
+                'County Attorney': 0.860072942,
+                'County Engineer': 1.054282961,
+                'IT Department': 1.944117959,
+                'Human Resources': 0.671411781,
+                'Financial Services': 0.830310887,
+                'Purchasing Department': 0.686545029,
+                'Economic Development': 0.157385782,
+                'Emergency Management': 0.669898456,
+                'Fleet Management': 0.753131321,
+                '1200 Agriculture Extension': 0.345542502,
+                'All Other Services': 16.84280086
+        };
+
+
+        //threshold value to aggregate small vals (because graphic cannot depict small pie slices well)
+        const thresholdPercent = 1.0; //0.34; // <- 0.34 val make it last (smallest pie slice)
+
+        //function to return new array with aggregated small vals, depending on above treshold constant (any vals below threshold will be aggregated)
+        const slices = Object.values(tax).map((v, i) => ({ label: Object.keys(tax)[i], value: v }))
+              .reduce((accumulator, currObj) => {
+                //const percent = 100 * currObj.value / taxtotal;
+                const percent = currObj.value;
+    
+                if (percent < thresholdPercent) {
+                  const others = accumulator.find(o => o.label == 'Others');
+      
+                if (!others) {
+                  return accumulator.concat({ label: 'Others', value: currObj.value });
+                }
+                others.value += currObj.value;
+            
+                } else {
+                accumulator.push(currObj);
+                }
+                return accumulator;
+  
+              }, []);
+
+      
+      require(["esri/widgets/Search", "esri/request", "esri/layers/FeatureLayer"], (Search, esriRequest, FeatureLayer) => {
+
+        const fLFlaglerAddress = new FeatureLayer({
+            url: "https://services3.arcgis.com/hSKL9bYjhP4rHxSD/ArcGIS/rest/services/address_point_taxable/FeatureServer/0"
+        });
+
+        var search = new Search({
+          container: "searchDiv",
+          includeDefaultSources: false,
+          sources: [
+            {
+              layer: fLFlaglerAddress,
+              searchFields: ["add_display", "PARCEL_ID"],
+              displayField: "add_display",
+              exactMatch: false,
+              outFields: ["TAXABLE", "add_display"],
+              name: "Addresses",
+              placeholder: "example: 6613 Canal Ave Bunnell"
+            }
+          ]
+        });
+
+
+        search.on("search-complete", function (event) {
+          document.getElementById("results").innerHTML = "";
+          var html = "";
+          html = event.results[0].results[0].feature.attributes.add_display;
+          document.getElementById("results").innerHTML = "...current selected address:  " + html;
+
+          
+            // added condition for no tax
+            var taxable = event.results[0].results[0].feature.attributes.TAXABLE;
+            if (taxable == 0){
+              document.getElementById("results").innerHTML = "--- NO TAX --- NOTE THERE ARE NO TAX VALUES RETRIEVED";
+            }
+            var taxtotal = taxable * millage * 0.001;                   //1 mil = 1/1000
+            console.log("total tax: " + taxtotal);
+            //var taxAdjust = Object.values(slices).map(function(element) {
+            //    return Math.round(element/100*taxtotal);                //millage is the current total county ad valorem tax rate (see script header section)
+            //});
+            var taxAdjust = slices.map(o => Math.round(o.value * taxtotal) / 100);
+
+            //console.log("values: " + taxAdjust.map(o => o.value));
+            //console.log("labels: " + taxAdjust.map(o => o.label));
+            console.log("tax array vals: " + Object.values(taxAdjust));
+
+            var trace1 = {
+                values: Object.values(taxAdjust), //taxAdjust.map(o => o.values),
+                texttemplate: "$%{value:.2f} (%{percent:.2%})",  //%{value:.3f // <- this is important; took me a good while to figure this out, a D3 feature
+                labels: slices.map(o => o.label),
+                text: slices.map(o => o.label),
+                hovertemplate: '<i>%{text}</i><br>$%{value:.2f}<extra></extra>',
+                type: 'pie'
+            };
+
+            // table
+
+            // sort descending to match order of pie chart (which is in desc order in counterclockwise direction from upper right quadrant)
+            const sortable = Object.fromEntries(
+              Object.entries(tax).sort(([,a],[,b]) => b-a)
+            );
+
+            var taxAdjustTable = Object.values(sortable).map(function(element) {
+                return Math.round(element*taxtotal) / 100;                //millage is the current total county ad valorem tax rate (see script header section)
+            });
+
+            var colvalues = [
+              Object.keys(sortable),
+              Object.values(taxAdjustTable).map(o => "$" + o.toFixed(2))
+            ]
+
+            console.log("formatted tax array $: " + Object.values(taxAdjustTable).map(o => o.toFixed(2)));
+
+            var headerColor = "grey";
+            var rowEvenColor = "lightgrey";
+            var rowOddColor = "white";
+
+            var datatable = {
+              type: 'table',
+              header: {
+                values: [["<b>COUNTY DEPTS</b>"], ["<b>TAX DOLLARS</b>"]],
+                align: "center",
+                line: {width: 1, color: 'black'},
+                fill: {color: headerColor},
+                font: {family: "Arial", size: 12, color: "white"}
+              },
+              cells: {
+              values: colvalues,
+              align: ["center", "center"],
+              line: {color: "black", width: 1},
+              fill: {color: [Array(Object.keys(tax).length).fill([rowOddColor,rowEvenColor]).flat()]},
+              font: {family: "Arial", size: 11, color: ["black"]}
+              },
+              xaxis: 'x',
+              yaxis: 'y',
+              domain: {x: [0,0.3], y: [0.25, 0.25]}
+            }
+
+          var data = [datatable,trace1]
+
+          // define subplot axes
+          var axis = {
+            showline: true,
+            zeroline: false,
+            showgrid: true,
+            mirror:true,
+            ticklen: 4,
+            gridcolor: '#ffffff',
+            tickfont: {size: 11},
+          }
+
+          var axis1 = {domain: [0, 1], anchor: 'y1', showticklabels: false, hoverformat: '.2f'}
+          var axis2 = {domain: [1, 1], anchor: 'y2', showticklabels: false, hoverformat: '.2f'}
+          var axis3 = {domain: [1, 1], anchor: 'y3', hoverformat: '.2f'}
+          var axis4 = {domain: [1, 1], anchor: 'x1', hoverformat: '.2f'}
+          var axis5 = {domain: [1, 1], anchor: 'x2', tickprefix: '$', hoverformat: '.2f'}
+          var axis6 = {domain: [1, 1], anchor: 'x3', tickprefix: '\u20BF', hoverformat: '.2f'}
+
+          // define layout
+          var layout = {
+            title: `Tax Distribution<br>[${html} (total: $${Math.round(taxtotal * 100) / 100})]`,  //`My name is ${name}`
+            plot_bgcolor: 'rgba(228, 222, 249, 0.65)',
+            showlegend: false,
+            autosize: false,
+            width: 2100,
+  height: 800,
+            xaxis1: Object.assign(axis1,axis),
+            xaxis2: Object.assign(axis2,axis),
+            xaxis3: Object.assign(axis3,axis),
+            yaxis1: Object.assign(axis4,axis),
+            yaxis2: Object.assign(axis5,axis),
+            yaxis3: Object.assign(axis6,axis),
+          }
+
+          Plotly.newPlot('myDivPie', data, layout);
+
+        });
+      });
+    </script>
+
+  </body>
+</html>
