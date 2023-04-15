@@ -252,7 +252,7 @@
             title: `Tax Distribution<br>[${html} (total: $${Math.round(taxtotal * 100) / 100})]`,  //`My name is ${name}`
             plot_bgcolor: 'rgba(228, 222, 249, 0.65)',
             showlegend: false,
-            autosize: false,
+            autosize: true,
             width: 2100,
   height: 800,
             xaxis1: Object.assign(axis1,axis),
@@ -262,8 +262,9 @@
             yaxis2: Object.assign(axis5,axis),
             yaxis3: Object.assign(axis6,axis),
           }
-
-          Plotly.newPlot('myDivPie', data, layout);
+          
+          var config = {responsive: true};
+          Plotly.newPlot('myDivPie', data, layout, config);
 
         });
       });
