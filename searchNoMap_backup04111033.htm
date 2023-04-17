@@ -1,17 +1,6 @@
 <html>
   <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="initial-scale=1,maximum-scale=1,user-scalable=no"
-    />
-    <!--
-     ArcGIS API for JavaScript, https://js.arcgis.com
-     For more information about the widgets-search-3d sample,
-     read the original sample description at developers.arcgis.com.
-     https://developers.arcgis.com/javascript/latest/sample-code/widgets-search-3d/index.html
-     -->
-    <title>Search Widget | Sample | ArcGIS API for JavaScript 4.26</title>
+
 
     <style>
         html,
@@ -39,12 +28,6 @@
           width: 75%;
         }
 
-        #viewDiv {
-        padding: 0;
-        margin: 0;
-        height: 100%;
-        width: 100%;
-      }
       </style>
 
 <link rel="stylesheet" href="https://js.arcgis.com/4.26/esri/themes/light/main.css" />
@@ -56,15 +39,13 @@
 <body>
 
 
-  <div id="viewDiv">
+  
     <div id="searchDiv"></div>
     <br />
     <div id="results"></div>
     <br />
-    <pre id="text"></pre>
     <div id='myDivPie'><!--....for example, enter the address: 30 LAUGHING GULL LN, PALM COAST--></div>
-    <!-- <div id='myDivTbl'></div> -->
-  </div>
+  
   
 
     <script>
@@ -146,7 +127,7 @@
               exactMatch: false,
               outFields: ["TAXABLE", "add_display"],
               name: "Addresses",
-              placeholder: "example: 6613 Canal Ave Bunnell"
+              placeholder: "enter address"
             }
           ]
         });
@@ -229,41 +210,22 @@
 
           var data = [datatable,trace1]
 
-          // define subplot axes
-          var axis = {
-            showline: true,
-            zeroline: false,
-            showgrid: true,
-            mirror:true,
-            ticklen: 4,
-            gridcolor: '#ffffff',
-            tickfont: {size: 11},
-          }
 
-          var axis1 = {domain: [0, 1], anchor: 'y1', showticklabels: false, hoverformat: '.2f'}
-          var axis2 = {domain: [1, 1], anchor: 'y2', showticklabels: false, hoverformat: '.2f'}
-          var axis3 = {domain: [1, 1], anchor: 'y3', hoverformat: '.2f'}
-          var axis4 = {domain: [1, 1], anchor: 'x1', hoverformat: '.2f'}
-          var axis5 = {domain: [1, 1], anchor: 'x2', tickprefix: '$', hoverformat: '.2f'}
-          var axis6 = {domain: [1, 1], anchor: 'x3', tickprefix: '\u20BF', hoverformat: '.2f'}
 
           // define layout
           var layout = {
-            title: `Tax Distribution<br>[${html} (total: $${Math.round(taxtotal * 100) / 100})]`,  //`My name is ${name}`
-            plot_bgcolor: 'rgba(228, 222, 249, 0.65)',
+            title: {text: `<b>Tax Distribution</b><br>${html} (total: $${Math.round(taxtotal * 100) / 100})`, x: 0.5, xanchor: "center"},
+            titlefont: {"size": 20},
+            //width: 1800, //2100,
+            //height: 800, //800,
             showlegend: false,
             autosize: true,
-            width: 2100,
-  height: 800,
-            xaxis1: Object.assign(axis1,axis),
-            xaxis2: Object.assign(axis2,axis),
-            xaxis3: Object.assign(axis3,axis),
-            yaxis1: Object.assign(axis4,axis),
-            yaxis2: Object.assign(axis5,axis),
-            yaxis3: Object.assign(axis6,axis),
+            automargin: true,
+            autocolorscale: true
           }
-          
-          var config = {responsive: true};
+
+          var config = {responsive: true, displayModeBar: false};
+
           Plotly.newPlot('myDivPie', data, layout, config);
 
         });
