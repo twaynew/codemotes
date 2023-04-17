@@ -1,7 +1,5 @@
 <html>
   <head>
-
-
     <style>
         html,
         body,
@@ -14,7 +12,7 @@
         }
   
         .container {
-          padding: 1em;
+          padding: 5em;
         }
   
         #btnQuery {
@@ -25,6 +23,7 @@
         }
   
         input {
+          padding: 5em;
           width: 75%;
         }
 
@@ -37,9 +36,10 @@
 </head>
 
 <body>
-
-
-  
+    <br />
+    <div id="guide0">&nbspThis tool computes how your property taxes are distributed among county depts/services.<br>&nbspYour tax bill is automatically searched by your address or parcel ID.</div>
+    <div id="guide1"><br>&nbspPlease enter your address in the search box below (where "enter address" appears).<br>&nbspWhen your address appears in the list below the box, select it.</div>  
+    <br />
     <div id="searchDiv"></div>
     <br />
     <div id="results"></div>
@@ -162,7 +162,11 @@
                 labels: slices.map(o => o.label),
                 text: slices.map(o => o.label),
                 hovertemplate: '<i>%{text}</i><br>$%{value:.2f}<extra></extra>',
-                type: 'pie'
+                type: 'pie',
+                xaxis: 'x',
+              yaxis: 'y',
+              //domain: {x: [0,0.3], y: [0.25, 0.25]}
+              domain: {x: [0.5,0.8]}
             };
 
             // table
@@ -205,7 +209,8 @@
               },
               xaxis: 'x',
               yaxis: 'y',
-              domain: {x: [0,0.3], y: [0.25, 0.25]}
+              //domain: {x: [0,0.3], y: [0.25, 0.25]}
+              domain: {x: [0,0.4]}
             }
 
           var data = [datatable,trace1]
