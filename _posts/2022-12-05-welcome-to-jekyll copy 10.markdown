@@ -29,7 +29,7 @@ print_hi('Tom')
 #=> prints 'Hi, Tom' to STDOUT.
 {% endhighlight %}
 
-<h2>What day is it?</h2>
+<h2>What day is it??</h2>
 
 <p id="demo"></p>
 
