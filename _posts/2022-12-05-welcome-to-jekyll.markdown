@@ -6,6 +6,20 @@ categories: jekyll update
 ---
 You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
 
+$$ x = y^2 $$
+
+...the above was successful blocked; the below should be equivalent:
+
+\\[ x = y^2 \\]
+
+inline:  \\(\sum_{i=0}^n i^2 = \frac{(n^2+n)(2n+1)}{6}\\)
+
+
+
+This sentence uses `$` delimiters to show math inline:  $\sqrt{3x-1}+(1+x)^2$
+
+...the above `$` syntax was corrected with escape backslashes:  \\(\sqrt{3x-1}+(1+x)^2\\)
+
 Jekyll requires blog post files to be named according to the following format:
 
 `YEAR-MONTH-DAY-title.MARKUP`
