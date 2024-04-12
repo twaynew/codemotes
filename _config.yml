@@ -28,6 +28,7 @@ baseurl: "/codemotes" # the subpath of your site, e.g. /blog
 url: "https://twaynew.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: jekyllrb
 github_username:  jekyll
+markdown: kramdown
 
 show_excerpts: true
 bannerphoto: Screen Shot 2023-01-13 at 7.03.48 PM.jpg
