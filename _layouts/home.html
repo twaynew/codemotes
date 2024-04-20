@@ -11,7 +11,7 @@ list_title: here in home_html front matter"
   {{ content }}
 
   {%- if site.posts.size > 0 -%}
-    <h2 class="post-list-heading">{{ page.list_title | default: "My 2024 Posts" }} <a href='{{ site.base_url | relative_url }}'>Home</a></h2>
+    <h2 class="post-list-heading">{{ site.list_title | default: "My 2024 Posts" }} <a href='{{ site.base_url | relative_url }}'>Home</a></h2>
     <ul class="post-list">
       {%- for post in paginator.posts -%}
       <li>
