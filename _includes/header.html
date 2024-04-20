@@ -1,13 +1,14 @@
+<header class="site-header0" role="banner">
 {% if page.layout == 'home' %}
-  <header class="site-header0" role="banner">
-  <script src="{{ "/assets/js/foo.js" | relative_url }}"></script>
-{% else %}
-  <header class="site-header" role="banner">
-{% endif %}
     <div class="wrapper">
       <a class="site-title" rel="author" href="{{ "/" | relative_url }}">{{ site.title }}</a>
       <a class="site-title0"> ...programming, bit by byte</a>
     </div>
+{% else %}
+    <script src="{{ "/assets/js/foo.js" | relative_url }}"></script>
+{% endif %}
+    
+
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script id="MathJax-script" async
           src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
