@@ -15,7 +15,7 @@ function myFunction( myImage ) {
 }
 
 
-const imageUrl0 = "{{ site.baseurl }}/assets/{{ site.bannerphoto }}"; // Screen Shot 2023-01-13 at 7.03.48 PM.jpg";
+const imageUrl0 = "{{ site.baseurl }}/assets/icy5lakesgaylord.jpg"; // Screen Shot 2023-01-13 at 7.03.48 PM.jpg";
 const imageUrl1 = "{{ site.baseurl }}/assets/fall5.jpg";
 
 var time = new Date().getDate();
