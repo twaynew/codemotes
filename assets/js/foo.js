@@ -19,7 +19,7 @@ const imageUrl1 = "{{ site.baseurl }}/assets/fallorange.jpg";
 const imageUrl2 = "{{ site.baseurl }}/assets/{{ site.bannerphoto }}";
 
 const pageLayout = "{{ page.path }}";
-if pageLayout == "home" {
+if pageLayout === "home" {
     myFunction( imageUrl2 );
 } else {
     if (time % 2 == 0) {
