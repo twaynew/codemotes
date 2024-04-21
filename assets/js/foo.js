@@ -28,4 +28,3 @@ if pageLayout === "home" {
         myFunction( imageUrl0 );
     }
 }
-console.log(pageLayout);
