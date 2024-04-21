@@ -28,3 +28,4 @@ if pageLayout == "home" {
         myFunction( imageUrl0 );
     }
 }
+console.log("{{ page.layout }}");
