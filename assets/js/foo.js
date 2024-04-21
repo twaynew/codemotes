@@ -18,7 +18,7 @@ const imageUrl0 = "{{ site.baseurl }}/assets/icy5lakesgaylord.jpg"; // Screen Sh
 const imageUrl1 = "{{ site.baseurl }}/assets/fallorange.jpg";
 const imageUrl2 = "{{ site.baseurl }}/assets/{{ site.bannerphoto }}";
 
-const pageLayout = "{{ page.layout }}";
+const pageLayout = "{{ page.path }}";
 if pageLayout == "home" {
     myFunction( imageUrl2 );
 } else {
