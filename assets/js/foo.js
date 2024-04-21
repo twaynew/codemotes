@@ -18,6 +18,8 @@ const imageUrl0 = "{{ site.baseurl }}/assets/icy5lakesgaylord.jpg"; // Screen Sh
 const imageUrl1 = "{{ site.baseurl }}/assets/fallorange.jpg";
 const imageUrl2 = "{{ site.baseurl }}/assets/{{ site.bannerphoto }}";
 
+var time = new Date().getDate();
+
 if (time % 2 == 0) {
     myFunction( imageUrl1 );
 } else {
