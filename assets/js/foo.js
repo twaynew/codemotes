@@ -18,13 +18,13 @@ const imageUrl0 = "{{ site.baseurl }}/assets/icy5lakesgaylord.jpg"; // Screen Sh
 const imageUrl1 = "{{ site.baseurl }}/assets/fallorange.jpg";
 const imageUrl2 = "{{ site.baseurl }}/assets/{{ site.bannerphoto }}";
 
-{% if page.layout == 'home' %}
+const pageLayout = "{{ page.layout }}";
+if pageLayout == "home" {
     myFunction( imageUrl2 );
-{% else %}
-var time = new Date().getDate();
-if (time % 2 == 0) {
-    myFunction( imageUrl1 );
 } else {
-    myFunction( imageUrl0 );
+    if (time % 2 == 0) {
+        myFunction( imageUrl1 );
+    } else {
+        myFunction( imageUrl0 );
+    }
 }
-{% endif %}
