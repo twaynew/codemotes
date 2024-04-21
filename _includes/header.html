@@ -1,7 +1,7 @@
 <header class="site-header0" role="banner">
 {% if page.layout == 'home' %}
     <div class="wrapper">
-      <a class="site-title" rel="author" href="{{ "/" | relative_url }}">{{ site.title }}</a>
+      <a class="site-title" rel="author" href="{{ "/" | relative_url }}">{{ site.title }} {{page.layout}} {{page.title}}</a>
       <a class="site-title0"> ...programming, bit by byte</a>
     </div>
 {% endif %}
