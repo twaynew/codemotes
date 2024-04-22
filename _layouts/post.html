@@ -8,7 +8,7 @@ layout: default
     <p class="post-meta">
       {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
       <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-        {{ page.date | date: date_format }} <a href="{{ "/" | relative_url }}">     < back to front page ></a>
+        {{ page.date | date: date_format }} <a href="{{ "/" | relative_url }}">&emsp;< back to front page ></a>
       </time>
       {%- if page.modified_date -%}
         ~ 
